@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarModelRegister.Application.Domain.Interface;
+using CarModelRegister.Application.Domain.Request;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarModelApi.Controllers
 {
@@ -7,20 +9,29 @@ namespace CarModelApi.Controllers
 
     public class CarRegisterController : ControllerBase
     {
+        private readonly ICarModelService _carModelService;
 
+        public CarRegisterController(ICarModelService carModelService)
+        {
+            _carModelService = carModelService;
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok();
+            var result = await _carModelService.GetAll();
+            return Ok(result);
         }
+
 
         [HttpPost]
 
-        public async Task<IActionResult> PostCar()
+        public async Task<IActionResult> PostCar([FromBody] CarRequest request)
         {
-            return Ok();
+           var result = await _carModelService.AddCar(request);
+           return Ok(result);
         }
+
 
         [HttpDelete]
 

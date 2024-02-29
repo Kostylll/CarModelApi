@@ -1,4 +1,5 @@
-﻿using CarModelRegister.Application.Domain.Interface;
+﻿using CarModelRegister.Application.Domain.Aggregates;
+using CarModelRegister.Application.Domain.Interface;
 using CarModelRegister.Application.Domain.Request;
 using CarModelRegister.Application.Domain.Response;
 using CarModelRegister.Application.Infra.Data.DBContext;
@@ -22,14 +23,46 @@ namespace CarModelRegister.Application.Services
             _context = context;
         }
 
-        public Task<bool> AddCar(CarRequest request)
+        public async Task<bool> AddCar(CarRequest request)
         {
-            throw new NotImplementedException();
+            var car = new Car()
+            {
+                Model = request.Model,
+                Color = request.Color,
+                Price = request.Price,
+                Description = request.Description,
+                Type = request.Type,
+
+
+
+            };
+            await _carRepository.AddAsync(car);
+            await _carRepository.SaveChangesAsync();
+
+            return true;
         }
 
-        public Task<List<CarResponse>> GetAll()
+        public async Task<List<CarResponse>> GetAll()
         {
-            throw new NotImplementedException();
+            var carViewModeList = new List<CarResponse>();
+            var cars = await _carRepository.GetAllAsync();
+
+            foreach (var car in cars) {
+
+                var carViewModel = new CarResponse();
+
+                carViewModel.Model = car.Model;
+                carViewModel.Color = car.Color; 
+                carViewModel.Price = car.Price;
+                carViewModel.Description = car.Description;
+                carViewModel.Type = car.Type;
+                
+            
+                carViewModeList.Add(carViewModel);
+                
+            
+            }
+            return carViewModeList;
         }
 
         public Task<CarResponse> GetCar(string id)
