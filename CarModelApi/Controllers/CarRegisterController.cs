@@ -33,10 +33,12 @@ namespace CarModelApi.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
 
-        public void DeleteCar()
+        public async Task<IActionResult> DeleteCar(string id)
         {
+            var result = await _carModelService.RemoveCar(id);
+            return Ok(result);
             
         }
 

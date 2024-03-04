@@ -11,7 +11,7 @@ namespace CarModelRegister.Application.Domain.Interface
     public interface ICarModelService
     {
         Task<bool> AddCar(CarRequest request);
-        Task<bool> RemoveCar(string id);
+        Task<int> RemoveCar(string id);
         Task<bool> UpdateCar(CarRequest request);
         Task<CarResponse> GetCar(string id);
         Task<List<CarResponse>> GetAll();

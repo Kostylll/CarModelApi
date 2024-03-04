@@ -27,6 +27,7 @@ namespace CarModelRegister.Application.Services
         {
             var car = new Car()
             {
+
                 Model = request.Model,
                 Color = request.Color,
                 Price = request.Price,
@@ -51,6 +52,7 @@ namespace CarModelRegister.Application.Services
 
                 var carViewModel = new CarResponse();
 
+                carViewModel.Id = car.Id;
                 carViewModel.Model = car.Model;
                 carViewModel.Color = car.Color; 
                 carViewModel.Price = car.Price;
@@ -70,9 +72,12 @@ namespace CarModelRegister.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> RemoveCar(string id)
+        public async Task<int> RemoveCar(string id)
         {
-            throw new NotImplementedException();
+            var carDelete = await _carRepository.GetByIdAsync(id);
+            _carRepository.Delete(carDelete);
+            await _carRepository.SaveChangesAsync();
+            return 0;
         }
 
         public Task<bool> UpdateCar(CarRequest request)
