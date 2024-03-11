@@ -9,6 +9,8 @@ namespace CarModelRegister.Application.Domain.Request
 {
     public class CarRequest
     {
+            public string Id {  get; set; }    
+
             public string Model { get; set; }
 
             public string Color { get; set; }

@@ -9,9 +9,9 @@ namespace CarModelApi.Controllers
 
     public class CarRegisterController : ControllerBase
     {
-        private readonly ICarModelService _carModelService;
+        private readonly ICarModelServices _carModelService;
 
-        public CarRegisterController(ICarModelService carModelService)
+        public CarRegisterController(ICarModelServices carModelService)
         {
             _carModelService = carModelService;
         }
@@ -22,6 +22,7 @@ namespace CarModelApi.Controllers
             var result = await _carModelService.GetAll();
             return Ok(result);
         }
+
 
 
         [HttpPost]

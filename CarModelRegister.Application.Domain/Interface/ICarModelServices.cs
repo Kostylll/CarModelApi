@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarModelRegister.Application.Domain.Interface
 {
-    public interface ICarModelService
+    public interface ICarModelServices
     {
         Task<bool> AddCar(CarRequest request);
         Task<int> RemoveCar(string id);

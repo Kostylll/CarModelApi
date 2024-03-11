@@ -12,6 +12,8 @@ namespace CarModelRegister.Application.Infra.Data.DBContext
 
         public DbSet<Car> Car { get; set; }
 
+        public DbSet<Financial> Financial { get; set; }
+
         public CarModelDbContext(DbContextOptions<CarModelDbContext> options) : base(options) 
         { 
         }
@@ -20,6 +22,7 @@ namespace CarModelRegister.Application.Infra.Data.DBContext
         {
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
             modelBuilder.Entity<Car>().Property(x => x.Id).HasDefaultValue("NEWID()");
+            modelBuilder.Entity<Financial>().Property(x => x.Id).HasDefaultValue("NEWID()");
             modelBuilder.Ignore<Notification>();
 
 

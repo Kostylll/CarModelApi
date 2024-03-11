@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CarModelRegister.Application.Services
 {
-    public class CarModelServices : ICarModelService
+    public class CarModelServices : ICarModelServices
     {
         private readonly CarModelDbContext _context;
         private readonly ICarRepository _carRepository;

@@ -11,21 +11,26 @@ namespace CarModelApi.Extension
         {
             services.AddServices();
             services.AddRepository();
+            services.AddControllers();
             return services;
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<ICarModelService, CarModelServices>();
-            services.AddScoped<IFinancialService, FinancialServices>();
+            services.AddScoped<ICarModelServices, CarModelServices>();
+            services.AddScoped<IFinancialServices, FinancialServices>();
+            services.AddScoped<FinancialServices>();
+
             return services;
         }
 
         public static IServiceCollection AddRepository(this IServiceCollection services)
         {
             services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<IFinancialRepository, FinancialRepository>();
             return services;
         }
 
+       
     }
 }

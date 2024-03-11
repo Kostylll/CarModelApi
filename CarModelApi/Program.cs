@@ -12,8 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServices();
 builder.Services.AddRepository();
-
-
+builder.Services.AddControllers(
+options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+builder.Services.AddControllers(x => x.AllowEmptyInputInBodyModelBinding = true);
 
 builder.Services.AddDbContext<CarModelDbContext>(options =>
 {
